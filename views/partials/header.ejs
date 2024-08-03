@@ -9,16 +9,37 @@
 
 <body>
   <nav>
-    <h1><a href="/">Ninja Smoothies</a></h1>
-    <ul>
-      <% if (user) { %>
-        <li>Welcome, <%= user.email %>
-        </li>
-        <li><a href="./logout"></a>logout</li>
-        <% } else {%>
-          <li><a href="./login"></a>login</li>
-          <li><a href="./signup" class="btn">Sign up</a></li>
-          <% } %>
-    </ul>
+    <a href="/"> <img src="/logo.jpg" alt="" height="100px" width="100px"></a>
+    <% if (user) { %>
+      Welcome, <%= user.firstname %>
+        <%= user.lastname %>
+          <% } else { %>
+            <% } %>
+
+              <ul>
+                <% if (user) { %>
+                  <li>Welcome, <%= user.firstname %>
+                      <%= user.lastname %>
+                  </li>
+                  <li><button><a href="/logout">Log out</a></button></li>
+                  <li><button><a href="/home">home</a></button></li>
+                  <li><button><a href="/">job</a></button></li>
+                  <li><button><a href="/blogs/create">create job</a></button></li>
+                  <li><button><a href="/dashboard">dashboard</a></button></li>
+                  <li><button><a href="/home">home</a></button></li>
+                  <!-- <li><button><a href="/login">login</a></button></li> -->
+                  <li><button><a href="/profile">profile</a></button></li>
+                  <li><button><a href="./signup" class="btn">Sign up</a></button></li>
+                  <% } else { %>
+                    <li><button><a href="/">job</a></button></li>
+                    <!-- <li><button><a href="/blogs/create">create job</a></button></li> -->
+                    <!-- <li><button><a href="/dashboard">dashboard</a></button></li> -->
+                    <!-- <li><button><a href="/home">home</a></button></li> -->
+                    <li><button><a href="/login">login</a></button></li>
+                    <!-- <li><button><a href="/profile">profile</a></button></li> -->
+                    <li><button><a href="./signup" class="btn">Sign up</a></button></li>
+                    <% } %>
+              </ul>
+
 
   </nav>

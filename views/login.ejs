@@ -6,10 +6,8 @@
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <nav>
-    <h1><a href="/">Ninja Smoothies</a></h1>
-  </nav>
-  
+
+    <%- include('partials/header'); -%>
   
     <form>
         <h2>login</h2>
@@ -19,9 +17,11 @@
         <label for="password">Password</label>
         <input type="password" name="password" required />
         <div class="password error"></div>
-        <button>login</button>
-    </form>
+        <button>login</button><br>
+        <div class="testbtn">   <p>Not yet registered ? <button><a id="already" class="buttonreg" href="/signup">signup</a></button></p>   </div>
 
+    </div>
+        
     <script>
         const form = document.querySelector('form')
         const emailError = document.querySelector('.email.error');
@@ -34,7 +34,6 @@
 
             emailError.textContent = '';
             passwordError.textContent = '';
-
 
             //get the values
             const email = form.email.value;

@@ -30,5 +30,12 @@ mongoose
 app.get('*', checkUser);
 app.get("/", (req, res) => res.render("home"));
 app.get("/smoothies", requireAuth, (req, res) => res.render("smoothies"));
+app.get("/home", requireAuth, (req, res) => res.render("smoothies"));
+
+app.get('/profil', requireAuth, (req, res) => res.render('profil'));
+app.get('/createJob', requireAuth, (req, res) => res.render('createJob'));
+app.get('/job', requireAuth, (req, res) => res.render('job'));
+app.get('/profile', requireAuth, (req, res) => res.render('profile'));
+
 app.use(authRoutes);
 

@@ -1,57 +1,102 @@
 <%- include('partials/header'); -%>
 
+<div class="containerSignup">
+<div class="formSignup">
+
     <form>
-        <h2>Sign up</h2>
+        <h1>Sign up</h1>
+    <ul>
+        <li>
+            <div class="firstnameS">
+                <label for="firstname">First name</label>
+                <input id="firstnameInput" type="text" name="firstname" required>
+                <div class="firstname error"></div>
+            </div>
+        </li>
+    
+        <li>
+            <div class="lastnameS">
+                <label for="lastname">Last name</label>
+                <input id="lastnameInput" type="text" name="lastname" required>
+                <div class="lastname error"></div>
+            </div>
+        </li>
+    </ul>
+
+    <div class="emailS">
         <label for="email">Email</label>
-        <input type="text" name="email" required />
+        <input type="text" name="email" required>
         <div class="email error"></div>
+    </div>
+
+    <div class="gitHubS">
+        <label for="gitHub">GitHub</label>
+        <input type="text" name="gitHub">
+        <div class="gitHub error"></div>
+    </div>
+
+    <div class="passwordS">
         <label for="password">Password</label>
-        <input type="password" name="password" required />
+        <input type="password" name="password" required>
         <div class="password error"></div>
-        <button>Sign up</button>
+    </div>
+
+    <div class="repeatPasswordS">
+        <label for="repeatPassword">Confirm password</label>
+        <input type="password" name="repeatPassword" required>
+        <div class="repeatPassword error"></div>
+    </div>
+
+        <button id="buttonS">Register</button>
+        <div class="testbtn">   <p>Already registered ? <button><a id="already" class="buttonreg" href="/login">login</a></button></p>   </div>
+        
+    
     </form>
+</div>
+</div>
 
-    <script>
-        const form = document.querySelector('form');
-        const emailError = document.querySelector('.email.error');
-        const passwordError = document.querySelector('.password.error');
+<script>
+    const form = document.querySelector('form');
+    const emailError = document.querySelector('.email.error')
+    const passwordError = document.querySelector('.password.error')
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
+        // Reset values
+        emailError.textContent = ''
+        passwordError.textContent = ''
 
-            // reset errors
+        // Get values
+        const firstname = form.firstname.value;
+        const lastname = form.lastname.value;
+        const email = form.email.value;
+        const gitHub = form.gitHub.value;
+        const password = form.password.value;
 
-            emailError.textContent = '';
-            passwordError.textContent = '';
-
-
-            //get the values
-            const email = form.email.value;
-            const password = form.password.value;
-
-            try {
-                const res = await fetch('/signup', {
-                    method: 'POST',
-                    body: JSON.stringify({ email, password }),
-                    headers: { 'Content-Type': 'application/json' }
-                });
-                const data = await res.json();
-                console.log(data);
-                if (data.errors) {
-                    emailError.textContent = data.errors.email;
-                    passwordError.textContent = data.errors.password;
-                }
-                if (data.user) {
-                    location.assign('/');
-                }
+        try{
+            const res = await fetch('/signup', {
+                method: 'POST',
+                body: JSON.stringify({ firstname, lastname, email, gitHub, password }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            const data = await res.json()
+            console.log(data)
+            if (data.errors) {
+                emailError.textContent = data.errors.email
+                passwordError.textContent = data.errors.password
             }
-            catch (err) {
-                console.log(err);
+            if (data.user) {
+                location.assign('/')
             }
+        }
+        catch (err) {
+            console.log(err)
+        }
 
-        });
-
-    </script>
+    })
+</script>
 
 
     <%- include('partials/footer'); -%>
+    
